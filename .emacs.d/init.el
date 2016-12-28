@@ -42,10 +42,10 @@
 
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 
+(require 'init-better-defaults)
 (require 'init-ido)
 (require 'init-magit)
 (require 'init-key-maps)
-(require 'init-neotree)
 (require 'init-file-backup-settings)
 (require 'init-yaml-mode)
 (require 'init-coffee)

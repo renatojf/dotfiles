@@ -6,6 +6,7 @@ custom/
 # temp files directories
 cache/
 log/
+auto-save-list/
 
 # bkp directories
 .bkp/
