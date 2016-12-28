@@ -20,8 +20,13 @@
                          ("marmalade" . "https://marmalade-repo.org/packages/")
                          ("melpa" . "https://melpa.org/packages/")))
 
-(projectile-mode)
-(linum-mode)
+(package-initialize)
+
+;; Line numbers
+(global-linum-mode 1)
+
+;; Load projectile on initialization
+(projectile-global-mode)
 
 ;; Load up color theme folder
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
@@ -43,6 +48,7 @@
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 
 (require 'init-better-defaults)
+(require 'init-auto-complete)
 (require 'init-ido)
 (require 'init-magit)
 (require 'init-key-maps)
@@ -51,6 +57,7 @@
 (require 'init-coffee)
 (require 'init-haml-mode)
 (require 'init-rvm)
+(require 'init-smartparens)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
