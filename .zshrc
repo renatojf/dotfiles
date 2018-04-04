@@ -24,6 +24,23 @@ source $ZSH/oh-my-zsh.sh
 
 # You may need to manually set your language environment
 export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+
+# GoPath
+export GOPATH=$HOME/Documents/Code/go
+export PATH=$GOPATH/bin:$PATH
+
+# Confluent
+export CONFLUENT_HOME=~/confluent
+export PATH=$HOME/confluent/bin:$PATH
+
+# Python
+export PATH="/usr/local/opt/python/libexec/bin:$PATH"
+
+# MySQL
+MYSQL=/usr/local/mysql/bin
+export PATH=$PATH:$MYSQL
+export DYLD_LIBRARY_PATH=/usr/local/mysql/lib:$DYLD_LIBRARY_PATH
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
@@ -51,3 +68,18 @@ bindkey "^[^[[D" backward-word
 c() { cd ~/Documents/Code/$1; }
 _c() { _files -W ~/Documents/Code -/; }
 compdef _c c
+
+export PATH="/usr/local/opt/mysql@5.6/bin:$PATH"
+
+# Docker Kafka Host
+if [[ -z "${DOCKER_HOST_IP-}" ]]; then
+  docker_host_ip=$(docker run --rm --net host alpine ip address show eth0 | awk '$1=="inet" {print $2}' | cut -f1 -d'/')
+  # Work around Docker for Mac 1.12.0-rc2-beta16 (build: 9493)
+  if [[ $docker_host_ip = '192.168.65.2' ]]; then
+    docker_host_ip=$(/sbin/ifconfig | grep -v '127.0.0.1' | awk '$1=="inet" {print $2}' | cut -f1 -d'/' | head -n 1)
+  fi
+  export DOCKER_HOST_IP=$docker_host_ip
+fi
+
+# internal ip
+alias intip="ifconfig | grep 'inet ' | grep -v 127.0.0.1 | cut -d  ' ' -f 2"
